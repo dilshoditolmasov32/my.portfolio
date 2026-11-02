@@ -7,7 +7,6 @@ import { Icon } from './Icon'
 import { Reveal } from './Reveal'
 import { Terminal } from './Terminal'
 
-// The hero sits on the dark ink field, so text is drawn in the light "bg" colour with red accents.
 const muted = 'color-mix(in srgb, var(--color-bg) 82%, transparent)'
 const rule = 'color-mix(in srgb, var(--color-bg) 45%, transparent)'
 const gridLine = 'color-mix(in srgb, var(--color-bg) 20%, transparent)'
@@ -25,7 +24,6 @@ export function HeroSection({ showGrid = true, autoplay = true }: Props) {
   const heroRef = useRef<HTMLElement>(null)
   const markerRef = useRef<HTMLDivElement>(null)
 
-  // Snapping cursor marker — mouse only, never hides the native cursor.
   const onMove = (e: PointerEvent) => {
     const hero = heroRef.current
     const marker = markerRef.current
@@ -105,21 +103,21 @@ export function HeroSection({ showGrid = true, autoplay = true }: Props) {
           padding: '0 clamp(20px,5vw,64px) clamp(32px,4vw,56px)',
         }}
       >
-        {/* First screen: the name block is centred vertically in the viewport below the header */}
+      
         <div
           style={{
-            minHeight: 'calc(100svh - 66px)',
+            minHeight: narrow ? 'auto' : 'calc(100svh - 66px)',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            padding: 'clamp(32px,5vw,64px) 0',
+            padding: narrow ? 'clamp(24px,8vw,40px) 0' : 'clamp(32px,5vw,64px) 0',
           }}
         >
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: narrow ? 'minmax(0,1fr)' : 'minmax(0,1fr) clamp(280px,34vw,440px)',
-            gridTemplateRows: '1fr auto auto auto 1fr',
+            gridTemplateRows: narrow ? 'auto' : '1fr auto auto auto 1fr',
             columnGap: 'clamp(32px,5vw,72px)',
             rowGap: 'clamp(16px,2vw,24px)',
           }}
@@ -150,7 +148,7 @@ export function HeroSection({ showGrid = true, autoplay = true }: Props) {
             className="portrait"
             style={{
               gridColumn: narrow ? 1 : 2,
-              gridRow: narrow ? 5 : '1 / span 5',
+              gridRow: narrow ? 1 : '1 / span 5',
               margin: 0,
               width: '100%',
               maxWidth: 460,
